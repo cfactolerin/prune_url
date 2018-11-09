@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2018_11_08_040052) do
 
   create_table "links", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "code"
-    t.string "original"
+    t.string "original", limit: 512
     t.string "url_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -29,14 +29,14 @@ ActiveRecord::Schema.define(version: 2018_11_08_040052) do
     t.string "os"
     t.string "country"
     t.string "city"
-    t.string "ua"
-    t.string "sha"
-    t.integer "visit_count"
+    t.string "ua", limit: 512
+    t.string "viewer_hash"
+    t.integer "view_count", default: 0
     t.bigint "link_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["link_id"], name: "index_viewers_on_link_id"
-    t.index ["sha"], name: "index_viewers_on_sha"
+    t.index ["viewer_hash"], name: "index_viewers_on_viewer_hash"
   end
 
 end

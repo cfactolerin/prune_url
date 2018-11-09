@@ -7,11 +7,11 @@ class CreateViewers < ActiveRecord::Migration[5.2]
       t.string :os
       t.string :country
       t.string :city
-      t.string :ua
-      t.string :sha
-      t.integer :visit_count
+      t.string :ua, limit: 512
+      t.string :viewer_hash
+      t.integer :view_count, default: 0
       t.belongs_to :link
-      t.index :sha
+      t.index :viewer_hash
       t.timestamps
     end
   end

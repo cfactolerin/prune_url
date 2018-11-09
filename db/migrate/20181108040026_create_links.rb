@@ -2,7 +2,7 @@ class CreateLinks < ActiveRecord::Migration[5.2]
   def change
     create_table :links do |t|
       t.string :code
-      t.string :original
+      t.string :original, limit: 512
       t.string :url_digest
       t.index :code
       t.index :url_digest
