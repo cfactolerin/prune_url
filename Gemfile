@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.5' # Build JSON APIs with ease. Read more: https://github.
 gem 'bcrypt', '~> 3.1.7' # Use ActiveModel has_secure_password
 gem 'bootsnap', '>= 1.1.0', require: false # Reduces boot times through caching; required in config/boot.rb
 
+# For hashing and cleaning the URL
 gem 'addressable'
 gem 'base62-rb' # Generate a base62 hash using a number
 
@@ -22,23 +23,21 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'clipboard-rails'
 
-
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+# For recording the stats
+gem 'sucker_punch', '~> 2.0'
+gem 'maxminddb', '~> 0.1.19'
+gem 'useragent'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
 end
 
