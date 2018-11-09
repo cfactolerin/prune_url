@@ -26,6 +26,7 @@ class LinksController < ApplicationController
   def visit
     link = Link.find_by(code: params[:code])
     if link
+      RecordStatsJob.perform_async(link, request.remote_ip, request.user_agent)
       redirect_to link.original, status: :moved_permanently
     else
       render :file => "#{Rails.root}/public/404.html",  layout: false, status: :not_found

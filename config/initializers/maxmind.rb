@@ -1,0 +1,1 @@
+::MaxMind = MaxMindDB.new(Rails.root.join('lib', 'GeoLite2-City.mmdb').to_s)
