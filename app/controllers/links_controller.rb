@@ -28,7 +28,7 @@ class LinksController < ApplicationController
     if link
       redirect_to link.original, status: :moved_permanently
     else
-      raise ActionController::RoutingError.new('Not Found')
+      render :file => "#{Rails.root}/public/404.html",  layout: false, status: :not_found
     end
   end
 
