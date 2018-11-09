@@ -1,0 +1,150 @@
+// Place all the styles related to the Site controller here.
+// They will automatically be included in application.scss.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+  color: #333;
+  text-shadow: none;
+  background-color: #fff;
+  border: 1px solid #fff;
+}
+
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 100%;
+  background-color: #444;
+}
+body {
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 3px rgba(0,0,0,.5);
+}
+
+.links-wrapper {
+  display: table;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+  box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+}
+
+.links-wrapper-inner {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.main-container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.inner {
+  padding: 30px;
+}
+
+/*
+ * Header
+ */
+.mainhead-logo {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
+@media (min-width: 768px) {
+  .mainhead-logo {
+    float: left;
+  }
+  .masthead-nav {
+    float: right;
+  }
+}
+
+
+.main {
+  padding: 0 20px;
+}
+.main .btn-lg {
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .mainhead {
+    position: fixed;
+    top: 0;
+  }
+
+  .mainhead,
+  .main-container {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .mainhead,
+  .main-container {
+    width: 700px;
+  }
+}
+
+#links {
+  form {
+    margin-bottom: 7px;
+    input[type=text] {
+      width: 70%;
+    }}
+
+  p.lead {
+    font-size: 16px;
+  }
+
+  .panel.link-container {
+    background: #333333;
+    border-color: gray;
+    width: fit-content;
+    margin: 15px auto;
+    padding: 0 15px;
+
+    .panel-body {
+      padding: 10px;
+      .original {
+        color: #9e9e9e;
+      }
+      .details {
+        a {
+          padding-right: 5px;
+        }
+      }
+      .pruned {
+        font-size: 16px;
+        font-weight: bold;
+        color: #75bfff;
+        padding-right: 10px;
+      }
+    }
+  }
+
+  .alert {
+    width: fit-content;
+    padding: 10px 100px;
+    margin: 15px auto;
+    text-shadow: none;
+    &.alert-danger {
+      background-color: #e2aeae;
+      color: #000000;
+    }
+  }
+}

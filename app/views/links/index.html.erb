@@ -1,0 +1,36 @@
+<div id="links" class="links-wrapper">
+  <div class="mainhead clearfix">
+    <h3 class="mainhead-logo"><%= link_to 'PruneURL', root_path %></h3>
+  </div>
+  <div class="links-wrapper-inner">
+    <div class="main-container">
+      <div class="inner main">
+        <%= form_with url: links_path, local: true, id: 'shortened-form', class: 'form form-inline' do |f| %>
+          <%= f.text_field :url, class: 'input-lg form-control', placeholder: 'Put your URL here' %>
+          <input class="btn btn-primary btn-lg" type="submit" value="Prune">
+        <% end %>
+        <p class="lead">
+          Yet another url shortener site. :)
+        </p>
+
+        <div class="panel panel-default link-container <%= 'hidden' unless @link.code %>">
+          <div class="panel-body">
+            <div class="original"><%= @link.original if @link %></div>
+            <div class="details">
+              <span class="pruned">
+                <%= pruned_url @link %>
+              </span>
+              <button class="clipboard-btn btn btn-sm btn-primary" data-clipboard-text="<%= pruned_url @link %>">
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="error-container alert alert-danger <%= 'hidden' unless flash[:error] %>" role="alert">
+          <%= flash[:error] %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
