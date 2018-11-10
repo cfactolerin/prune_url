@@ -9,7 +9,7 @@ FactoryBot.define do
     city { "Cebu" }
     ua { "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:63.0) Gecko/20100101 Firefox/63.0" }
     viewer_digest { "51e4e8b7e6a9b48d97048bae111c31c4" }
-    view_count { 0 }
+    view_count { 1 }
   end
 
 end

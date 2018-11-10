@@ -43,6 +43,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'shoulda-matchers', '4.0.0.rc1'
   gem 'rails-controller-testing'
+  gem "rspec-json_expectations", "~> 2.1"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

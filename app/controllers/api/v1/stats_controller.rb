@@ -55,7 +55,7 @@ module Api
       def link
         @link = Link.includes(:viewers).find_by(code: params[:code])
         if @link.nil?
-          render json: Stats.new(ERROR_CODE_NOT_FOUND, params[:code])
+          render json: Stats.new(ERROR_CODE_NOT_FOUND, params[:code]), status: 404
         end
       end
 
