@@ -5,7 +5,11 @@ module Api
     class StatsController < ActionController::API
       before_action :link
 
-      ERROR_CODE_NOT_FOUND = "Code not found".freeze # Error message used if code is not found
+      # Error message used if code is not found
+      ERROR_CODE_NOT_FOUND = "Code not found".freeze
+
+      # Error message if the system failed to access the database
+      ERROR_FAILED_TO_ACCESS_DB = "Something went wrong with the system".freeze
 
       # This endpoint shows the stats summary of the specified link.
       # This is intended for creating graphs related to the viewer demographics of a link.
@@ -76,9 +80,13 @@ module Api
 
       # Retrieve the link using the :code parameter and short circuit it if the code is not found
       def link
-        @link = Link.includes(:viewers).find_by(code: params[:code])
-        if @link.nil?
-          render json: Stats.new(ERROR_CODE_NOT_FOUND, params[:code]), status: 404
+        begin
+          @link = Link.includes(:viewers).find_by(code: params[:code])
+          if @link.nil?
+            render json: Stats.new(ERROR_CODE_NOT_FOUND, params[:code]), status: 404
+          end
+        rescue => error
+          render json: Stats.new(ERROR_FAILED_TO_ACCESS_DB, params[:code]), status: 500
         end
       end
 

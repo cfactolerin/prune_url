@@ -25,8 +25,26 @@ describe Api::V1::StatsController do
     end
   end
 
+  shared_examples "a call with no db access" do
+    it 'should return status code 500' do
+      allow_any_instance_of(ActiveRecord::FinderMethods).to receive(:find_by).and_raise("DB connection issues")
+      get endpoint, params: { code: link.code }
+      expect(response.status).to eq(500)
+    end
+
+    it 'should return a valid json response' do
+      allow_any_instance_of(ActiveRecord::FinderMethods).to receive(:find_by).and_raise("DB connection issues")
+      get endpoint, params: { code: link.code }
+      expect(response.body).to include_json(message: "Something went wrong with the system",
+                                            code: link.code,
+                                            api_version: "v1")
+    end
+  end
+
   context '#show' do
     let(:endpoint) { :show }
+
+    it_behaves_like "a call with no db access"
 
     context 'Invalid Code' do
       let(:code) { "123456" }
@@ -56,6 +74,8 @@ describe Api::V1::StatsController do
   context "#viewers" do
     let(:endpoint) { :viewers }
 
+    it_behaves_like "a call with no db access"
+
     context 'Invalid Code' do
       let(:code) { "123456" }
       it_behaves_like "a call with invalid code"
@@ -79,6 +99,8 @@ describe Api::V1::StatsController do
   context "#viewers_by_country" do
     let(:endpoint) { :viewers_by_country }
 
+    it_behaves_like "a call with no db access"
+
     context 'Invalid Code' do
       let(:code) { "123456" }
       it_behaves_like "a call with invalid code"
@@ -101,6 +123,8 @@ describe Api::V1::StatsController do
 
   context "#viewers_by_browser" do
     let(:endpoint) { :viewers_by_browser }
+
+    it_behaves_like "a call with no db access"
 
     context 'Invalid Code' do
       let(:code) { "123456" }
