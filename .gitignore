@@ -8,7 +8,6 @@
 /.bundle
 
 # Ignore the default database config.
-/config/database.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -32,5 +31,3 @@
 .idea/
 .DS_Store
 
-# Ignore the Maxmind library
-*.mmdb
