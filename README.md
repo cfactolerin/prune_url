@@ -1,24 +1,52 @@
-# README
+# Prune /pro͞on/
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Prune** came from the verb prune which means to cut back, trim, clip, remove.
+This application will generate a minified version of a web address.
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+* Ruby 2.5.3
+* Bundler 1.17.1
+* Mysql
 
-* System dependencies
 
-* Configuration
+## Setup
 
-* Database creation
+**Clone the repository**
+```
+> git clone git@github.com:cfactolerin/prune_url.git
+```
 
-* Database initialization
+**Install dependencies**
+```
+# Install the bundler gem
+> gem install bundler
 
-* How to run the test suite
+# Install the required gems
+> bundle install      
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+**Setup the Database**
+```
+# Update with database credentials
+> cp config/database_sample.yml config/database.yml
 
-* Deployment instructions
+# Create the database and tables
+> rails db:setup 
+```
 
-* ...
+**Setup MaxmindDB**
+
+This applications uses MaxmindDB to resolve the countries and cities using the ip address.
+
+Download the GeoLite2 City database [here](http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz) ([Full Site](https://dev.maxmind.com/geoip/geoip2/geolite2/))
+
+Extract the file and copy `GeoLite2-City.mmdb` to `/lib`
+
+## Testing
+
+This app uses RSpec to test.
+
+```
+> rspec spec/
+```
