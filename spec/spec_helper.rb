@@ -18,6 +18,7 @@ require 'rails_helper'
 require 'factory_bot_rails'
 require 'digest'
 require 'base62-rb'
+require 'sucker_punch/testing/inline' # This will make all async method synchronous
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
