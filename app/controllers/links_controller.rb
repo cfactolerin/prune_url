@@ -1,5 +1,7 @@
 class LinksController < ApplicationController
 
+  ERROR_DB_CONNECTION = "Oooops something went wrong with our system. Please try again".freeze
+
   # Displays the main page of the app.
   # If a code is passed, the existing link will be displayed
   #
@@ -30,7 +32,7 @@ class LinksController < ApplicationController
         link = Link.find_or_create(normalized_url)
         redirect_to root_path(code: link.code)
       rescue => error
-        flash[:error] = "Oooops something went wrong with our system. Please try again"
+        flash[:error] = ERROR_DB_CONNECTION
         redirect_to root_path
       end
     end

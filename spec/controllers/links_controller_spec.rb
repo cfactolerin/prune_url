@@ -94,6 +94,22 @@ describe LinksController do
         expect(Link.all.size).to eq(1)
       end
     end
+
+    context "Database can't be reached" do
+      let(:url) { "www.cnn.com" }
+
+      it 'should redirect to root_path' do
+        allow(Link).to receive(:find_or_create).with(any_args).and_raise("DB connection issues")
+        post :create, params: {url: url}
+        expect(response).to redirect_to(root_path)
+      end
+
+      it 'should notify the user' do
+        allow(Link).to receive(:find_or_create).with(any_args).and_raise("DB connection issues")
+        post :create, params: {url: url}
+        expect(flash[:error]).to eq(LinksController::ERROR_DB_CONNECTION)
+      end
+    end
   end
 
   context "GET visit" do
