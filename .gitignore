@@ -32,5 +32,3 @@
 .idea/
 .DS_Store
 
-# Ignore the Maxmind library
-*.mmdb
