@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 2018_11_08_040052) do
     t.string "country"
     t.string "city"
     t.string "ua", limit: 512
-    t.string "viewer_hash"
+    t.string "viewer_digest"
     t.integer "view_count", default: 0
     t.bigint "link_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["link_id"], name: "index_viewers_on_link_id"
-    t.index ["viewer_hash"], name: "index_viewers_on_viewer_hash"
+    t.index ["viewer_digest"], name: "index_viewers_on_viewer_digest"
   end
 
 end

@@ -32,9 +32,9 @@ class Link < ApplicationRecord
     # It will also add http by default if url doesn't include a scheme
     def normalize_url(original_url)
       if original_url.nil? || original_url.strip.empty?
-        original_url
+        nil
       else
-        uri = Addressable::URI.heuristic_parse(original_url.strip)
+        uri = Addressable::URI.heuristic_parse(original_url.strip).normalize
         uri.host.present? && /^http(s)?$/.match(uri.scheme) ? uri.to_s : nil
       end
     end

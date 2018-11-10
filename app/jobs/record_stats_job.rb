@@ -6,14 +6,16 @@ class RecordStatsJob
   def perform(link, ip, ua)
     ActiveRecord::Base.connection_pool.with_connection do
       viewer_hash = Viewer.md5(ip, ua)
-      viewer = Viewer.find_by(viewer_hash: viewer_hash)
+      viewer = Viewer.find_by(viewer_digest: viewer_hash)
+
+      # Increment the view count if the viewer is the same to save db space
       if viewer
         viewer.increment!(:view_count)
       else
         viewer = Viewer.new
         viewer.ip = ip
         viewer.ua = ua
-        viewer.viewer_hash = viewer_hash
+        viewer.viewer_digest = viewer_hash
 
         geo = MaxMind.lookup(ip)
         if geo.found?
