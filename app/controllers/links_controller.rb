@@ -29,7 +29,7 @@ class LinksController < ApplicationController
       redirect_to root_path
     else
       begin
-        link = Link.find_or_create(normalized_url)
+        link = Link.find_or_create(normalized_url, params[:type])
         redirect_to root_path(code: link.code)
       rescue => error
         flash[:error] = ERROR_DB_CONNECTION

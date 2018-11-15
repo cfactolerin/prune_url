@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2018_11_08_040052) do
 
-  create_table "links", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "links", force: :cascade do |t|
     t.string "code"
     t.string "original", limit: 512
     t.string "url_digest"
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 2018_11_08_040052) do
     t.index ["url_digest"], name: "index_links_on_url_digest"
   end
 
-  create_table "viewers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "viewers", force: :cascade do |t|
     t.string "ip"
     t.string "browser"
     t.string "browser_version"

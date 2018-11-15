@@ -2,6 +2,7 @@ require "digest"
 require "addressable/uri"
 require "base62-rb"
 
+
 # This class represents a pruned URL that was requested in the system.
 class Link < ApplicationRecord
   has_many :viewers
@@ -16,11 +17,11 @@ class Link < ApplicationRecord
     # The url will be hashed using md5 to make the query faster rather than using the url
     #
     # @param [String] url The url to be pruned.
-    def find_or_create(url)
+    def find_or_create(url, type)
       url_digest = md5(url)
       link = Link.find_by(url_digest: url_digest)
       if link.nil?
-        link = Link.new(code: generate_code, original: url, url_digest: url_digest)
+        link = Link.new(code: CodeGenerator.generate(type), original: url, url_digest: url_digest)
 
         # Loop until a unique code is generated.
         # This should mostly be done at most 2 rounds since the generate_code rarely collides
@@ -53,28 +54,6 @@ class Link < ApplicationRecord
     # @param [String] normalized_url The normalized url that will be encoded to MD5
     def md5(normalized_url)
       normalized_url.nil? ? "" : Digest::MD5.new.update(normalized_url).hexdigest
-    end
-
-    # Generate a random number between 9 to 99
-    def pad_numbers
-      rand(90) + 9
-    end
-
-    # Reduce the number so that it will give lesser characters
-    GAP = 9_999_999_999.freeze
-
-    # Returns a base62 string based on the current time.
-    # Tested with 20 million codes and got no collision
-    def generate_code
-      base = Time.now.to_f.round(5).to_s.split('.').map(&:to_i)
-
-      # random prevents collision when multiple links are added in the same millisecond
-      random_days = (rand(100000) * 1.days.to_i)
-
-      # Pad the current time in the front to ensure it won't have any collision in the near future.
-      # Pad the current time in the back to add randomness
-      magic_number = "#{pad_numbers}#{base.first + base.last + random_days}#{pad_numbers}".to_i - GAP
-      Base62.encode(magic_number)
     end
   end
 
