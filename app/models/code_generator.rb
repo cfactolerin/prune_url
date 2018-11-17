@@ -9,7 +9,7 @@ module CodeGenerator
     when MD5
       Digest::MD5.new.update(base_generated_string.to_s).hexdigest[0..8]
     when SHA
-      Digest::SHA1.hexdigest(base_generated_string.to_s).hexdigest[0..8]
+      Digest::SHA1.new.update(base_generated_string.to_s).hexdigest[0..8]
     else
       Base62.encode(base_generated_string)
     end
