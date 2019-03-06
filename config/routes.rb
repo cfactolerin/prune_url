@@ -10,6 +10,8 @@ Rails.application.routes.draw do
           get :viewers_by_browser
         end
       end
+
+      resources :links, param: :code, only: [:create]
     end
   end
 
